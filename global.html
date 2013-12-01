@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Global</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Global</h1>
+    
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+    
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+        
+        
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+        
+        
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="DatePicker"><span class="type-signature"></span>DatePicker<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        DatePicker is a html/js "widget" which will display
+all the days of a given month and allow selection of
+one specific day. It also implements controls to travel
+between months and jump into arbitrary time.
+
+The DatePicker itself contains no UI for the controls.
+
+Example usage:
+
+   // the container will have elements for the month
+   // added and removed from it.
+   var picker = new DatePicker(container);
+
+   // EVENTS:
+
+   // called when the user clicks a day in the calendar.
+   picker.onvaluechange = function(date) {}
+
+   // called when the month of the calendar changes.
+   // NOTE: at this time this can only happen programmatically
+   //       so there is only for control flow.
+   picker.onmonthchange = function(date) {}
+
+   // display a given year/month/date on the calendar the month
+   // is zero based just like the JS date constructor.
+   picker.display(2012, 0, 2);
+
+   // move to the next month.
+   picker.next();
+
+   // move to the previous month
+   picker.previous();
+    </div>
+    
+    
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="date_picker.js.html">value_selector/date_picker.js</a>, <a href="date_picker.js.html#line36">line 36</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="SpinDatePicker"><span class="type-signature"></span>SpinDatePicker<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        SpinDatePicker is a html/js "widget" which enables users
+pick a specific date. It display the date in the way based
+on the language setting.
+
+The SpinDatePicker itself contains no UI for the controls.
+
+Example usage:
+
+   // All necessary UI elements are contained in the root element.
+   var picker = new SpinDatePicker(root);
+   picker.value = new Date();
+   // after users pick a date
+   var newDate = picker.value;
+    </div>
+    
+    
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="spin_date_picker.js.html">value_selector/spin_date_picker.js</a>, <a href="spin_date_picker.js.html#line16">line 16</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="SystemScreen"><span class="type-signature"></span>SystemScreen<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        System app is made of a top-level `<div ="screen"></div>` DOM element
+which contain all possible screens displayed by the app.
+Multiple screens can be displayed at a time. We store the list of currently
+visible screens into this DOM element class attribute.
+    </div>
+    
+    
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_dialog.js.html">system_dialog.js</a>, <a href="system_dialog.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="timeoutID"><span class="type-signature"></span>timeoutID<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        One-shot timer used to refresh the clock at a minute's turn
+    </div>
+    
+    
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statusbar.js.html">statusbar.js</a>, <a href="statusbar.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="timerID"><span class="type-signature"></span>timerID<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        Timer used to refresh the clock every minute
+    </div>
+    
+    
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statusbar.js.html">statusbar.js</a>, <a href="statusbar.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="ValuePicker"><span class="type-signature"></span>ValuePicker<span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        base widget used in ValueSelector and SpinDatePicker widget
+    </div>
+    
+    
+    
+
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="value_picker.js.html">value_selector/value_picker.js</a>, <a href="value_picker.js.html#line4">line 4</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="addEventListeners"><span class="type-signature"></span>addEventListeners<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Set up event handlers for user interactions
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="net_error.js.html">net_error.js</a>, <a href="net_error.js.html#line6">line 6</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="Clock"><span class="type-signature"></span>Clock<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Creates an object used for refreshing the clock UI element. Handles all
+related timer manipulation (start/stop/cancel).
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statusbar.js.html">statusbar.js</a>, <a href="statusbar.js.html#line10">line 10</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="localizeElement"><span class="type-signature"></span>localizeElement<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Populate element with localized string
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="net_error.js.html">net_error.js</a>, <a href="net_error.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="populateErrorMessage"><span class="type-signature"></span>populateErrorMessage<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Display appropriate error messages
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="net_error.js.html">net_error.js</a>, <a href="net_error.js.html#line33">line 33</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="start"><span class="type-signature"></span>start<span class="signature">(refresh)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Start the timer used to refresh the clock, will call the specified
+callback at every timer tick to refresh the UI. The callback used to
+refresh the UI will also be called immediately to ensure the UI is
+consistent.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>refresh</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Function used to refresh the UI at every timer
+       tick, should accept a date object as its only argument.</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statusbar.js.html">statusbar.js</a>, <a href="statusbar.js.html#line26">line 26</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="stop"><span class="type-signature"></span>stop<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Stops the timer used to refresh the clock
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="statusbar.js.html">statusbar.js</a>, <a href="statusbar.js.html#line48">line 48</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="SystemDialog"><span class="type-signature"></span>SystemDialog<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        System app displays various kind of dialogs.
+A dialog is a system app 'screen' that has a high z-index and is used to be
+displayed on top of other apps. But it doesn't display over the status bar,
+nor the eventually displayed keyboard.
+
+`SystemDialog` except the dialog DOM Element `id`.
+This DOM Element has to have a DOM attribute 'role' set to 'dialog'.
+
+It also supports a second `options` object with following attributes:
+ `onHide`: function called when dialog is hidden, either when `hide()`
+           method is called, or when dialog is automatically hidden on
+           home button press
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="system_dialog.js.html">system_dialog.js</a>, <a href="system_dialog.js.html#line41">line 41</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="BrowserFrame.html">BrowserFrame</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addEventListeners">addEventListeners</a></li><li><a href="global.html#Clock">Clock</a></li><li><a href="global.html#DatePicker">DatePicker</a></li><li><a href="global.html#localizeElement">localizeElement</a></li><li><a href="global.html#populateErrorMessage">populateErrorMessage</a></li><li><a href="global.html#SpinDatePicker">SpinDatePicker</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#SystemDialog">SystemDialog</a></li><li><a href="global.html#SystemScreen">SystemScreen</a></li><li><a href="global.html#timeoutID">timeoutID</a></li><li><a href="global.html#timerID">timerID</a></li><li><a href="global.html#ValuePicker">ValuePicker</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha2</a> on Sun Dec 01 2013 09:32:20 GMT+0000 (UTC)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

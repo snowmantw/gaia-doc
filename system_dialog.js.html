@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: system_dialog.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: system_dialog.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/* -*- Mode: js; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- /
+/* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
+'use strict';
+
+/**
+ * System app is made of a top-level `&lt;div ="screen">&lt;/div>` DOM element
+ * which contain all possible screens displayed by the app.
+ * Multiple screens can be displayed at a time. We store the list of currently
+ * visible screens into this DOM element class attribute.
+ */
+var SystemScreen = {
+  screen: document.getElementById('screen'),
+
+  show: function ss_show(screenName) {
+    this.screen.classList.add(screenName);
+  },
+
+  hide: function ss_show(screenName) {
+    this.screen.classList.remove(screenName);
+  },
+
+  isVisible: function ss_isVisible(screenName) {
+    return this.screen.classList.contains(screenName);
+  }
+};
+
+/**
+ * System app displays various kind of dialogs.
+ * A dialog is a system app 'screen' that has a high z-index and is used to be
+ * displayed on top of other apps. But it doesn't display over the status bar,
+ * nor the eventually displayed keyboard.
+ *
+ * `SystemDialog` except the dialog DOM Element `id`.
+ * This DOM Element has to have a DOM attribute 'role' set to 'dialog'.
+ *
+ * It also supports a second `options` object with following attributes:
+ *  `onHide`: function called when dialog is hidden, either when `hide()`
+ *            method is called, or when dialog is automatically hidden on
+ *            home button press
+ */
+function SystemDialog(id, options) {
+  var overlay = document.getElementById('dialog-overlay');
+  var dialog = document.getElementById(id);
+  var screenName = 'dialog';
+
+  // Listen to keyboard visibility changes and window resizing
+  // in order to resize the dialog accordingly
+  function updateHeight(keyboardHeight) {
+    if (SystemScreen.isVisible(screenName)) {
+      var height = window.innerHeight -
+                   (keyboardHeight ? keyboardHeight : 0) -
+                   StatusBar.height;
+      overlay.style.height = height + 'px';
+    }
+  };
+  function handleEvent(evt) {
+    switch (evt.type) {
+      case 'resize':
+      case 'keyboardhide':
+        updateHeight();
+        break;
+      case 'keyboardchange':
+        var keyboardHeight = KeyboardManager.getHeight();
+        updateHeight(keyboardHeight);
+        break;
+      case 'home':
+      case 'holdhome':
+        // Automatically hide the dialog on home button press
+        if (SystemScreen.isVisible(screenName)) {
+          hide(evt.type);
+          // Prevent WindowManager to shift homescreen to the first page
+          // when the dialog is on top of the homescreen
+          var displayedApp = WindowManager.getDisplayedApp();
+          var displayedAppFrame = WindowManager.getAppFrame(displayedApp);
+          if (evt.type == 'home' &amp;&amp;
+              displayedAppFrame.classList.contains('homescreen'))
+            evt.stopImmediatePropagation();
+        }
+        break;
+    }
+  };
+  window.addEventListener('resize', handleEvent);
+  window.addEventListener('keyboardchange', handleEvent);
+  window.addEventListener('keyboardhide', handleEvent);
+  window.addEventListener('home', handleEvent);
+  window.addEventListener('holdhome', handleEvent);
+
+  function show() {
+    dialog.hidden = false;
+    dialog.classList.add(id);
+    SystemScreen.show(screenName);
+    updateHeight();
+  }
+
+  function hide(reason) {
+    dialog.hidden = true;
+    dialog.classList.remove(id);
+    SystemScreen.hide(screenName);
+    if (typeof(options.onHide) == 'function')
+      options.onHide(reason);
+  }
+
+  function isVisible() {
+    return SystemScreen.isVisible(screenName) &amp;&amp;
+           overlay.classList.contains(id);
+  }
+
+  return {
+    show: show,
+    hide: hide,
+    isVisible: isVisible
+  };
+}
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="BrowserFrame.html">BrowserFrame</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addEventListeners">addEventListeners</a></li><li><a href="global.html#Clock">Clock</a></li><li><a href="global.html#DatePicker">DatePicker</a></li><li><a href="global.html#localizeElement">localizeElement</a></li><li><a href="global.html#populateErrorMessage">populateErrorMessage</a></li><li><a href="global.html#SpinDatePicker">SpinDatePicker</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#SystemDialog">SystemDialog</a></li><li><a href="global.html#SystemScreen">SystemScreen</a></li><li><a href="global.html#timeoutID">timeoutID</a></li><li><a href="global.html#timerID">timerID</a></li><li><a href="global.html#ValuePicker">ValuePicker</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha2</a> on Sun Dec 01 2013 09:32:20 GMT+0000 (UTC)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

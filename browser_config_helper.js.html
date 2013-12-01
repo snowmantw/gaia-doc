@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: browser_config_helper.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: browser_config_helper.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>'use strict';
+
+(function(window) {
+  var isOutOfProcessDisabled = false;
+  /**
+   * This class generates browser configuration object
+   * from manifestURL or src provided.
+   *
+   * The configuration object is used for BrowserFrame generation.
+   *
+   * * If manifestURL is provided, we would treat it as a web app,
+   *   and then use Applications to fetch the remaining info we need
+   *   to construct the options for mozbrowser iframe.
+   *
+   * * If only URL is provided, we would treat it as a web page.
+   *
+   * The returned configuration object contains:
+   * * Origin: the same as appURL.
+   * * manifestURL: the same as manifestURL.
+   * * manifest: the parsed manifest object.
+   * * name: the name of the app, retrieved from manifest.
+   * * oop: indicate it's running out of process or in process.
+   *
+   * @param {String} appURL The URL of the app or the page to be opened.
+   * @param {String} [manifestURL] The manifest URL of the app.
+   */
+  window.BrowserConfigHelper = function(appURL, manifestURL) {
+    var app = Applications.getByManifestURL(manifestURL);
+    this.url = appURL;
+
+    if (app) {
+      var manifest = app.manifest;
+      var name = new ManifestHelper(manifest).name;
+      var origin = app.origin;
+
+      // Check if it's a virtual app from a entry point.
+      // If so, change the app name and origin to the
+      // entry point.
+      var entryPoints = manifest.entry_points;
+      if (entryPoints &amp;&amp; manifest.type == 'certified') {
+        var givenPath = this.url.substr(origin.length);
+
+        // Workaround here until the bug (to be filed) is fixed
+        // Basicly, gecko is sending the URL without launch_path sometimes
+        for (var ep in entryPoints) {
+          var currentEp = entryPoints[ep];
+          var path = givenPath;
+          if (path.indexOf('?') != -1) {
+            path = path.substr(0, path.indexOf('?'));
+          }
+
+          //Remove the origin and / to find if if the url is the entry point
+          if (path.indexOf('/' + ep) == 0 &amp;&amp;
+              (currentEp.launch_path == path)) {
+            origin = origin + currentEp.launch_path;
+            name = new ManifestHelper(currentEp).name;
+            for (var key in currentEp) {
+              if (key !== 'locale' &amp;&amp; key !== 'name') {
+                app.manifest[key] = currentEp[key];
+              }
+            }
+          }
+        }
+      }
+
+      // These apps currently have bugs preventing them from being
+      // run out of process. All other apps will be run OOP.
+      var host = document.location.host;
+      var domain = host.replace(/(^[\w\d]+\.)?([\w\d]+\.[a-z]+)/, '$2');
+      var protocol = document.location.protocol + '//';
+      var browserManifestUrl =
+        protocol + 'browser.' + domain + '/manifest.webapp';
+      var outOfProcessBlackList = [
+        browserManifestUrl
+        // Requires nested content processes (bug 761935).  This is not
+        // on the schedule for v1.
+      ];
+
+      if (!isOutOfProcessDisabled &amp;&amp;
+          outOfProcessBlackList.indexOf(manifestURL) === -1) {
+        // FIXME: content shouldn't control this directly
+        this.oop = true;
+      }
+
+      this.name = name;
+      this.manifestURL = manifestURL;
+      this.origin = origin;
+      this.manifest = app.manifest;
+    } else {
+      this.name = '';
+      this.origin = appURL;
+      this.manifestURL = '';
+      this.manifest = null;
+    }
+  };
+})(this);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="BrowserFrame.html">BrowserFrame</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addEventListeners">addEventListeners</a></li><li><a href="global.html#Clock">Clock</a></li><li><a href="global.html#DatePicker">DatePicker</a></li><li><a href="global.html#localizeElement">localizeElement</a></li><li><a href="global.html#populateErrorMessage">populateErrorMessage</a></li><li><a href="global.html#SpinDatePicker">SpinDatePicker</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#stop">stop</a></li><li><a href="global.html#SystemDialog">SystemDialog</a></li><li><a href="global.html#SystemScreen">SystemScreen</a></li><li><a href="global.html#timeoutID">timeoutID</a></li><li><a href="global.html#timerID">timerID</a></li><li><a href="global.html#ValuePicker">ValuePicker</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha2</a> on Sun Dec 01 2013 09:32:20 GMT+0000 (UTC)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
